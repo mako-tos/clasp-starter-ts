@@ -1,0 +1,9 @@
+# ignore files…
+**/**
+
+# except the extensions…
+!appsscript.json
+
+# and our transpiled code
+!index.js
+

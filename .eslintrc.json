@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true,
+    "ES2020": true
+  },
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "[plaintext]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "files.eol": "\n",
+    "editor.indentSize": 2,
+  },
+  "[bat]": {
+    "editor.indentSize": 2,
+    "files.eol": "\r\n",
+  },
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "editor.indentSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "files.eol": "\n",
+  },
+  "[typescript]": {
+    "editor.indentSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "files.eol": "\n",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    }
+  },
+  "[javascript]": {
+    "editor.indentSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "files.eol": "\n",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    }
+  }
+}
