@@ -1,10 +1,15 @@
-const { GasPlugin } = require('esbuild-gas-plugin')
+const { GasPlugin } = require("esbuild-gas-plugin");
+const { copyFile } = require("fs/promises");
 
-require('esbuild')
+require("esbuild")
   .build({
-    entryPoints: ['src/index.ts'],
+    entryPoints: ["src/index.ts"],
     bundle: true,
-    outfile: 'dist/index.js',
+    outfile: "dist/index.js",
     plugins: [GasPlugin],
   })
-  .catch(() => process.exit(1))
+  .catch(() => process.exit(1));
+
+(async () => {
+  await copyFile("./appsscript.json", "./dist/appsscript.json");
+})();

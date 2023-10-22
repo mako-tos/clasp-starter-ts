@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type { JestConfigWithTsJest } from 'ts-jest';
+import type { JestConfigWithTsJest } from "ts-jest";
 
 const config: JestConfigWithTsJest = {
   // All imported modules in your tests should be mocked automatically
@@ -176,10 +176,10 @@ const config: JestConfigWithTsJest = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
+    "^.+\\.tsx?$": [
+      "ts-jest",
       {
-        useEMS: true
+        useEMS: true,
       },
     ],
   },

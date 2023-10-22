@@ -43,5 +43,9 @@ https://zenn.dev/futahei/articles/a6fe22c0efbb5e
 `npm run build`
 `npm run watch`
 
+### デプロイ対象ファイル確認
+`npx clasp status`
+
 ### デプロイ
 `npm run push`
+
