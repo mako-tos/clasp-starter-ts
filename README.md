@@ -19,7 +19,7 @@ https://zenn.dev/futahei/articles/a6fe22c0efbb5e
 `copy .clasp-default.json .clasp.json`
 "scriptId" を割当てるプロジェクトのscript idに更新
 
-### crasp 初回の場合は 権限設定が必要
+### clasp 初回の場合は 権限設定が必要
 `https://script.google.com/home/usersettings` を開き権限有効にする
 
 ## フォルダ作成
