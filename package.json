@@ -1,5 +1,11 @@
 {
+  "name": "clasp-starter-ts",
+  "author": "mako-tos",
+  "license": "MIT",
   "version": "0.0.1",
+  "repository": {
+    "type": "git"
+  },
   "devDependencies": {
     "@google/clasp": "^2.4.2",
     "@types/google-apps-script": "^1.0.76",
@@ -22,5 +28,12 @@
     "clean": "npm cache clean --force",
     "test": "jest",
     "push": "npm run build && clasp push"
-  }
+  },
+  "keywords": [
+    "clasp",
+    "typescript",
+    "git",
+    "vscode",
+    "jest"
+  ]
 }
