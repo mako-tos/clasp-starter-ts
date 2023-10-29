@@ -1,37 +1,47 @@
 /**
- * 
+ * @returns true: テスト, false: 本番
+ */
+export function isTest(): boolean {
+  return PropertiesService.getScriptProperties().getProperty("TEST") === "true";
+}
+
+/**
+ *
  * @param func 関数
  * @returns 関数の実行結果
  * @throws 3回試して全部失敗した場合
  */
-function tryGet(func: Function) {
-  let error = null
+export function tryGet(func: Function) {
+  let error = null;
   for (let i = 0; i < 3; i++) {
     try {
-      return func()
+      return func();
     } catch (e) {
-      error = e
-      Utilities.sleep(100)
+      error = e;
+      Utilities.sleep(100);
     }
   }
-  throw error
+  throw error;
 }
 
 /**
- * 
+ *
  * @param id スプレッドシートID
- * @returns 
+ * @returns
  */
 function getSpreadsheet(id: string): GoogleAppsScript.Spreadsheet.Spreadsheet {
   return tryGet(() => SpreadsheetApp.openById(id));
 }
 
 /**
- * 
+ *
  * @param spreadsheet スプレッドシート
  * @param name シート名
- * @returns 
+ * @returns
  */
-function getSheet(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet, name: string): GoogleAppsScript.Spreadsheet.Sheet | null {
+function getSheet(
+  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet,
+  name: string
+): GoogleAppsScript.Spreadsheet.Sheet | null {
   return tryGet(() => spreadsheet.getSheetByName(name));
 }

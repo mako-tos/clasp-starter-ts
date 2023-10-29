@@ -10,6 +10,7 @@
     "@google/clasp": "^2.4.2",
     "@types/google-apps-script": "^1.0.76",
     "@types/jest": "^29.5.6",
+    "@types/mithril": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "esbuild": "^0.19.5",
     "esbuild-gas-plugin": "^0.8.0",
@@ -25,9 +26,9 @@
   },
   "scripts": {
     "build": "node build.js",
-    "clean": "npm cache clean --force",
+    "clean": "node clean.js",
     "test": "jest",
-    "push": "npm run build && clasp push"
+    "push": "npm run clean && npm run build && clasp push"
   },
   "keywords": [
     "clasp",
@@ -35,5 +36,8 @@
     "git",
     "vscode",
     "jest"
-  ]
+  ],
+  "dependencies": {
+    "mithril": "^2.2.2"
+  }
 }

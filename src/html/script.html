@@ -1,0 +1,183 @@
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", init);
+  function init() {
+    const root = document.getElementById("root");
+    m.route(root, "/", {
+      "/": HomeComponent, // `http://localhost/#!/home` の定義
+      "/create": CreateComponent,
+      "/update": UpdateComponent,
+      "/confirm": CreateComponent,
+    });
+  }
+  const condition = { submit: false, data: {}, focusId: "" };
+
+  const ButtonComponent = {
+    view: ({ attrs, children }) => {
+      if (attrs.class) {
+        attrs.class = `btn focus-ring ${attrs.class}`;
+      } else {
+        attrs.class = "btn focus-ring";
+      }
+      attrs.type = "button";
+      return m("button", attrs, children);
+    },
+  };
+  const ConfrimComponent = {
+    view: () => {
+      const path = m.route.get();
+      if (path !== "/create" && path !== "/update") return;
+      return m(
+        ButtonComponent,
+        {
+          onclick: () => {
+            m.route.set("/confirm");
+          },
+        },
+        "確認"
+      );
+    },
+  };
+  const SubmitComponent = {
+    view: () => {
+      const path = m.route.get();
+      if (path !== "/confirm") return;
+      if (condition.submit) return m(ButtonComponent, "送信中");
+      return [
+        m(
+          ButtonComponent,
+          {
+            onclick: () => {
+              if (condition.submit) return;
+              if (!doValidate()) return;
+              condition.submit = true;
+              document.querySelector("#submit").click();
+            },
+          },
+          "送信"
+        ),
+        m(
+          "button",
+          {
+            type: "submit",
+            class: "d-none",
+            id: "submit",
+          },
+          "非表示"
+        ),
+      ];
+    },
+  };
+  const ContainerComponent = {
+    view: ({ attrs, children }) => {
+      if (attrs.class) {
+        attrs.class = `container ${attrs.class}`;
+      } else {
+        attrs.class = "container";
+      }
+      return m("div", attrs, children);
+    },
+  };
+  const InputComponent = {
+    view: ({ attrs }) => {
+      const path = m.route.get();
+      const inputAttrs = {
+        name: attrs.id,
+        id: attrs.id,
+        type: attrs.type,
+        disabled: path === "/confirm" && !condition.submit,
+        required: !!attrs.required,
+        placeholder: attrs.id,
+      };
+      if (attrs.type === "tel") {
+        inputAttrs.maxLength = 13;
+      } else if (attrs.type == "number") {
+        inputAttrs.min = attrs.min;
+        inputAttrs.max = attrs.max;
+        inputAttrs.step = attrs.step;
+        if (!!attrs.list) inputAttrs.list = attrs.list;
+      }
+      if (condition.data[attrs.id]) attrs.value = condition.data[attrs.id];
+      if (["date", "time"].includes(attrs.type)) {
+        inputAttrs.type = condition.focusId === attrs.id ? attrs.type : "text";
+        inputAttrs.onfocus = () => {
+          condition.focusId = attrs.id;
+        };
+        inputAttrs.onblur = () => {
+          condition.focusId = "";
+        };
+      }
+      return m(`.form-floating.col-${attrs.size}`, [
+        m("input.form-control.focus-ring", inputAttrs),
+        m("label", { class: "form-control", for: attrs.id }, attrs.id),
+      ]);
+    },
+  };
+  const HomeComponent = {
+    view: () => {
+      return m(ContainerComponent, [
+        m(
+          ButtonComponent,
+          {
+            onclick: () => {
+              m.route.set("/create");
+            },
+          },
+          "作成"
+        ),
+        m(
+          ButtonComponent,
+          {
+            onclick: () => {
+              m.route.set("/update");
+            },
+          },
+          "更新"
+        ),
+      ]);
+    },
+  };
+  function createInputArea() {
+    const datalist = [
+      [
+        { component: InputComponent, attrs: { id: "テキスト", type: "text" } },
+        {
+          component: InputComponent,
+          attrs: { id: "ナンバー", type: "number", min: "0", max: "100" },
+        },
+        { component: InputComponent, attrs: { id: "日付", type: "date" } },
+        { component: InputComponent, attrs: { id: "時間", type: "time" } },
+      ],
+      [
+        { component: InputComponent, attrs: { id: "電話番号", type: "tel" } },
+        { component: InputComponent, attrs: { id: "FAX", type: "tel" } },
+      ],
+      [{ component: InputComponent, attrs: { id: "住所", type: "text" } }],
+    ];
+    return datalist.map((line) => {
+      const size = Math.floor(12 / line.length);
+      const row = line.map(({ component, attrs }) => {
+        attrs.size = size;
+        return m(component, attrs);
+      });
+      return m(".row.gx-0", row);
+    });
+  }
+  const CreateComponent = {
+    view: () => {
+      return m(".card.my-3.mx-2.py-1.px-1", [
+        m("h2", "登録画面"),
+        createInputArea(),
+        m(ConfrimComponent),
+        m(SubmitComponent),
+      ]);
+    },
+  };
+  const UpdateComponent = {
+    view: () => {
+      return m("div", "更新中");
+    },
+  };
+  function doValidate() {
+    return true;
+  }
+</script>

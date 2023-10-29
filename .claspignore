@@ -6,4 +6,4 @@
 
 # and our transpiled code
 !index.js
-
+!*.html

@@ -42,5 +42,17 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true,
     }
+  },
+  "[html]": {
+    "editor.indentSize": 2,
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "files.eol": "\n",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    }
   }
 }
